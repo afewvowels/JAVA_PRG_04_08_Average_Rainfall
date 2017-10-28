@@ -27,18 +27,31 @@ public class JAVA_PRG_04_08_Average_Rainfall {
      */
     public static void main(String[] args)
     {
+        // Constant for use in inner loop, number
+        // of months in a year
         final int INT_MONTHS_IN_A_YEAR = 12;
         
+        // For holding user input on how many years
+        // outer loop should run for
         int intNumYears;
         
+        // Running total for number of months
+        // could alternatively have calculated by
+        // multiplying INT_MONTHS by intNumYears.
+        // Makes more sense if the number of months
+        // is not precisely equal to a full year.
+        // (example: 30 months, or 20 months of rainfall data)
         int intMonthCounter = 0;
         
+        // Define floats for holding rainfall information
         float fltRainMonthly;
         float fltRainTotal = 0;
         float fltRainAverage;
         
+        // Define a string for user input and final output dialog
         String strUserInput;
         
+        // Loop while intNumYears is invalid
         do {
             strUserInput = JOptionPane.showInputDialog("Please enter the number"
                     + " of years you\nwould like to calculate average rainfall"
@@ -46,28 +59,37 @@ public class JAVA_PRG_04_08_Average_Rainfall {
             intNumYears = Integer.parseInt(strUserInput);
         } while(intNumYears <= 0 || intNumYears > 10);
         
+        // Here is the main nested loop sequence, outer is for years...
         for(int i = 0 ; i < intNumYears ; i++)
         {
+            //...inner loops is for months
             for(int j = 0 ; j < INT_MONTHS_IN_A_YEAR ; j++)
             {
+                // Data validation on monthly rainfall data
                 do {
                     strUserInput = JOptionPane.showInputDialog("Please enter the"
                             + " amount of rain that fell in month " + (j + 1) + ".");
                     fltRainMonthly = Float.parseFloat(strUserInput);
                 } while (fltRainMonthly < 0 || fltRainMonthly > 10000);
                 
+                // Add to running total and increment
+                // month counter (see note earlier in definition)
                 fltRainTotal += fltRainMonthly;
                 intMonthCounter++;
             }
         }
         
+        // Calculate average rainfall total
         fltRainAverage = fltRainTotal / intMonthCounter;
         
+        // Format results for user
         strUserInput = String.format("Your total rainfall was %.2f and\n"
                 + "the average rainfall was %.2f.", fltRainTotal, fltRainAverage);
         
+        // Output results for user
         JOptionPane.showMessageDialog(null, strUserInput);
         
+        // For use with JOptionPane
         System.exit(0);
     }
     
