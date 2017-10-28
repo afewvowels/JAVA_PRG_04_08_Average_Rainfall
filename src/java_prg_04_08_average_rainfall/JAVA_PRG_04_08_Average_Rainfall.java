@@ -5,6 +5,7 @@
  */
 package java_prg_04_08_average_rainfall;
 
+import javax.swing.JOptionPane;
 /**
  *
  * @author bluebackdev
@@ -26,7 +27,48 @@ public class JAVA_PRG_04_08_Average_Rainfall {
      */
     public static void main(String[] args)
     {
+        final int INT_MONTHS_IN_A_YEAR = 12;
         
+        int intNumYears;
+        
+        int intMonthCounter = 0;
+        
+        float fltRainMonthly;
+        float fltRainTotal = 0;
+        float fltRainAverage;
+        
+        String strUserInput;
+        
+        do {
+            strUserInput = JOptionPane.showInputDialog("Please enter the number"
+                    + " of years you\nwould like to calculate average rainfall"
+                    + " for.");
+            intNumYears = Integer.parseInt(strUserInput);
+        } while(intNumYears <= 0 || intNumYears > 10);
+        
+        for(int i = 0 ; i < intNumYears ; i++)
+        {
+            for(int j = 0 ; j < INT_MONTHS_IN_A_YEAR ; j++)
+            {
+                do {
+                    strUserInput = JOptionPane.showInputDialog("Please enter the"
+                            + " amount of rain that fell in month " + (j + 1) + ".");
+                    fltRainMonthly = Float.parseFloat(strUserInput);
+                } while (fltRainMonthly < 0 || fltRainMonthly > 10000);
+                
+                fltRainTotal += fltRainMonthly;
+                intMonthCounter++;
+            }
+        }
+        
+        fltRainAverage = fltRainTotal / intMonthCounter;
+        
+        strUserInput = String.format("Your total rainfall was %.2f and\n"
+                + "the average rainfall was %.2f.", fltRainTotal, fltRainAverage);
+        
+        JOptionPane.showMessageDialog(null, strUserInput);
+        
+        System.exit(0);
     }
     
 }
